@@ -1,0 +1,4 @@
+{"level":"info","ts":1659529863.753976,"caller":"zapperTest/main.go:52","msg":"Hello, World!"}
+{"level":"info","ts":1659529885.950855,"caller":"zapperTest/main.go:52","msg":"Hello, World!"}
+{"level":"info","ts":1659529886.9548118,"caller":"zapperTest/main.go:52","msg":"Hello, World!"}
+{"L":"INFO","T":"2022-08-03T20:32:10.416+0800","C":"zapperTest/main.go:52","M":"Hello, World!"}
