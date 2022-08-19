@@ -50,12 +50,6 @@ func main() {
 	// defer f.Close()
 
 	l := logInit(true)
-	// log.Info("Hello, World!")
-
-	// L, _ := zap.NewDevelopment()
-	// log = L.Sugar()
-	// // log = L.Sugar()
-	// log.Info("Hello, World!")
 
 	client := resty.New().SetLogger(l).SetDebug(true)
 	_, _ = client.R().
