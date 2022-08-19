@@ -3,12 +3,13 @@ package main
 import (
 	"os"
 
+	"github.com/go-resty/resty/v2"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
 
-func logInit(d bool, f *os.File) *zap.SugaredLogger {
+func logInit(d bool) *zap.SugaredLogger {
 
 	pe := zap.NewDevelopmentEncoderConfig()
 	fileEncoder := zapcore.NewJSONEncoder(pe)
@@ -42,17 +43,17 @@ func logInit(d bool, f *os.File) *zap.SugaredLogger {
 }
 
 func main() {
-	f, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		panic(err)
-	}
-	defer f.Close()
+	// f, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// defer f.Close()
 
-	log := logInit(false, f)
-	log.Info("Hello, World!")
+	l := logInit(true)
 
-	L, _ := zap.NewDevelopment()
-	log = L.Sugar()
-	// log = L.Sugar()
-	log.Info("Hello, World!")
+	client := resty.New().SetLogger(l).SetDebug(true)
+	_, _ = client.R().
+		EnableTrace().
+		Get("https://httpbin.org/get")
+
 }
